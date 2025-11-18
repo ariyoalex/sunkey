@@ -1,5 +1,5 @@
 // API Configuration - Point to your backend server
-const API_URL = 'https://v2.hireboothub.com/spin-win-api/api.php';
+const API_URL = 'https://v2.hireboothub.com/spin-win-api/api';
 
 // Utility: Make API calls
 async function apiCall(action, data = {}, method = 'GET') {

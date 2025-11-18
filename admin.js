@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'https://v2.hireboothub.com/spin-win-api/api.php';
+const API_URL = 'https://v2.hireboothub.com/spin-win-api/api';
 
 // Rate Limiting Configuration
 const RATE_LIMIT = {

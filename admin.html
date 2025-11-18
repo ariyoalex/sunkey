@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sunkey Beauty Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#7C02BE">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Admin Login Section -->
+    <div id="loginSection" class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-lg-5 col-md-7">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <img src="logo.png" width="150" class="mb-3">
+                            <h2 class="fw-bold">
+                                <i class="bi bi-shield-lock-fill text-primary"></i> Admin Login
+                            </h2>
+                            <p class="text-muted">Enter your credentials to access the admin panel</p>
+                        </div>
+                        <form id="adminLoginForm">
+                            <div class="mb-3">
+                                <label for="adminUsername" class="form-label fw-bold">Username</label>
+                                <input type="text" class="form-control" id="adminUsername" placeholder="Enter username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="adminPassword" class="form-label fw-bold">Password</label>
+                                <input type="password" class="form-control" id="adminPassword" placeholder="Enter password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="index.html" class="text-muted text-decoration-none">
+                                <i class="bi bi-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Section -->
+    <div id="adminPanel" class="container d-none">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-11">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>
+                        <i class="bi bi-shield-lock-fill text-primary"></i> Admin Panel
+                    </h2>
+                    <button id="logoutBtn" class="btn btn-outline-danger">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </div>
+
+                <!-- Admin Tabs -->
+                <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="customers-tab" data-bs-toggle="tab" data-bs-target="#customers" type="button">
+                            <i class="bi bi-people-fill"></i> Add Customers
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="prizes-tab" data-bs-toggle="tab" data-bs-target="#prizes" type="button">
+                            <i class="bi bi-trophy-fill"></i> Manage Prizes
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="campaign-tab" data-bs-toggle="tab" data-bs-target="#campaign" type="button">
+                            <i class="bi bi-calendar-event"></i> Campaign Settings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="records-tab" data-bs-toggle="tab" data-bs-target="#records" type="button">
+                            <i class="bi bi-table"></i> Spin Records
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="adminTabsContent">
+                    <!-- Add Customers Tab -->
+                    <div class="tab-pane fade show active" id="customers" role="tabpanel">
+                        <div class="card shadow border-0">
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-4">Add Qualified Customer</h4>
+                                <form id="adminForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="adminCode" class="form-label fw-bold">Last 4 Digits of Phone Number</label>
+                                            <input type="text" class="form-control" id="adminCode" placeholder="e.g., 3939" maxlength="4" pattern="[0-9]{4}" required>
+                                            <small class="text-muted">Enter customer's last 4 phone digits as their code</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="adminAmount" class="form-label fw-bold">Amount Purchased (₦)</label>
+                                            <input type="number" class="form-control" id="adminAmount" placeholder="e.g., 120000" min="1" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="customerName" class="form-label fw-bold">Customer Name (Optional)</label>
+                                            <input type="text" class="form-control" id="customerName" placeholder="Customer Name">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="customerPhone" class="form-label fw-bold">Full Phone Number (Optional)</label>
+                                            <input type="tel" class="form-control" id="customerPhone" placeholder="080XXXXXXXX">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="alert alert-info">
+                                                <i class="bi bi-info-circle"></i>
+                                                Prize will be automatically assigned based on purchase amount. Customer uses their last 4 phone digits to spin.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                        <i class="bi bi-plus-circle"></i> Save Customer
+                                    </button>
+                                </form>
+
+                                <!-- Customer List -->
+                                <div class="mt-5">
+                                    <h5 class="mb-3">Registered Customers</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Code (Last 4 Digits)</th>
+                                                    <th>Amount</th>
+                                                    <th>Prize Category</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="customerList"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manage Prizes Tab -->
+                    <div class="tab-pane fade" id="prizes" role="tabpanel">
+                        <div class="card shadow border-0">
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-4">Add/Edit Prize</h4>
+                                <form id="prizeForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="prizeName" class="form-label fw-bold">Prize Name</label>
+                                            <input type="text" class="form-control" id="prizeName" placeholder="e.g., 1 Roll-On" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prizeColor" class="form-label fw-bold">Color Code</label>
+                                            <input type="color" class="form-control form-control-color w-100" id="prizeColor" value="#28a745" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prizeImage" class="form-label fw-bold">Prize Image (URL or Emoji)</label>
+                                            <input type="text" class="form-control" id="prizeImage" placeholder="e.g., 🎁 or image URL" required>
+                                            <small class="text-muted">Use emoji or paste image URL</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prizeEmoji" class="form-label fw-bold">Prize Emoji (Optional)</label>
+                                            <input type="text" class="form-control" id="prizeEmoji" placeholder="e.g., 🎁" maxlength="2">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prizeMinPrice" class="form-label fw-bold">Minimum Price Range (₦)</label>
+                                            <input type="number" class="form-control" id="prizeMinPrice" placeholder="e.g., 0" min="0" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="prizeMaxPrice" class="form-label fw-bold">Maximum Price Range (₦)</label>
+                                            <input type="number" class="form-control" id="prizeMaxPrice" placeholder="e.g., 50000" min="0" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="alert alert-warning">
+                                                <i class="bi bi-exclamation-triangle"></i>
+                                                Changes to prizes will automatically reflect on the wheel spinner and prize categories on the homepage.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-lg mt-3">
+                                        <i class="bi bi-save"></i> Add Prize
+                                    </button>
+                                </form>
+
+                                <!-- Prize List -->
+                                <div class="mt-5">
+                                    <h5 class="mb-3">Current Prizes</h5>
+                                    <div id="prizesList" class="row g-3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campaign Settings Tab -->
+                    <div class="tab-pane fade" id="campaign" role="tabpanel">
+                        <div class="card shadow border-0">
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-4">Campaign Duration</h4>
+                                <form id="campaignForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="startDate" class="form-label fw-bold">Start Date</label>
+                                            <input type="date" class="form-control" id="startDate" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="endDate" class="form-label fw-bold">End Date</label>
+                                            <input type="date" class="form-control" id="endDate" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="whatsappNumber" class="form-label fw-bold">WhatsApp Number (with country code)</label>
+                                            <input type="tel" class="form-control" id="whatsappNumber" placeholder="2348012345678" required>
+                                            <small class="text-muted">Format: Country code + number (no + or spaces). Example: 2348012345678</small>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                        <i class="bi bi-check-circle"></i> Update Campaign
+                                    </button>
+                                </form>
+                                <div id="currentCampaign" class="mt-4"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spin Records Tab -->
+                    <div class="tab-pane fade" id="records" role="tabpanel">
+                        <div class="card shadow border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h4 class="card-title mb-0">Spin Records</h4>
+                                    <button id="exportBtn" class="btn btn-success">
+                                        <i class="bi bi-download"></i> Export Data
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Amount</th>
+                                                <th>Prize Won</th>
+                                                <th>Spin Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="recordsList"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
